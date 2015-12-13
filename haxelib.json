@@ -1,0 +1,16 @@
+{
+  "name": "struct",
+  "license": "GPL",
+  "description": "Structs plus algorithms",
+  "url": "https://github.com/bguiz/hxstruct",
+  "tags": ["data", "struct"],
+  "contributors" : ["bguiz"],
+  "classPath": "src/",
+  "version": "0.0.1",
+  "releasenote": "",
+  "dependencies":
+  {
+    "munit": "2.1.2",
+    "hamcrest": "2.0.0"
+  }
+}
