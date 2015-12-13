@@ -2,9 +2,9 @@ package bguiz.struct.dict;
 
 class UnsortedArrayDictionary {
   public static function search<K, T :(HasId<K>)> (dict: Array<T>, id: K): T {
-    for (v in dict) {
-      if (v.id == id) {
-        return v;
+    for (val in dict) {
+      if (val.id == id) {
+        return val;
       }
     }
     return null;
@@ -22,6 +22,26 @@ class UnsortedArrayDictionary {
         return;
       }
     }
+  }
+
+  public static function minimum<K, T :(HasId<K>)> (dict: Array<T>, comparator: T -> T-> Int): T {
+    var minVal = null;
+    for (val in dict) {
+      if (minVal == null || comparator(val, minVal) < 0) {
+        minVal = val;
+      }
+    }
+    return minVal;
+  }
+
+  public static function maximum<K, T :(HasId<K>)> (dict: Array<T>, comparator: T -> T-> Int): T {
+    var maxVal = null;
+    for (val in dict) {
+      if (maxVal == null || comparator(val, maxVal) > 0) {
+        maxVal = val;
+      }
+    }
+    return maxVal;
   }
 
 }

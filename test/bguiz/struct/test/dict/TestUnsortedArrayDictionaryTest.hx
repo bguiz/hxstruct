@@ -7,11 +7,16 @@ import bguiz.struct.dict.UnsortedArrayDictionary;
 
 typedef Foo = {
   public var id:Int;
+  public var size: Int;
 };
 
 class TestUnsortedArrayDictionaryTest
 {
   var dict:Array<Foo>;
+
+  static function fooComparator(a: Foo, b: Foo): Int {
+    return a.size - b.size;
+  }
 
   public function new()
   {
@@ -31,9 +36,9 @@ class TestUnsortedArrayDictionaryTest
   public function setup():Void
   {
     dict = new Array<Foo>();
-    dict.push({ id: 1 });
-    dict.push({ id: 2 });
-    dict.push({ id: 3 });
+    dict.push({ id: 1, size: 100 });
+    dict.push({ id: 2, size: 10 });
+    dict.push({ id: 3, size: 101 });
   }
 
   @After
@@ -63,9 +68,9 @@ class TestUnsortedArrayDictionaryTest
   public function testInsert():Void
   {
     Assert.areEqual(dict.length, 3);
-    UnsortedArrayDictionary.insert(dict, { id: 4 });
-    UnsortedArrayDictionary.insert(dict, { id: 5 });
-    UnsortedArrayDictionary.insert(dict, { id: 6 });
+    UnsortedArrayDictionary.insert(dict, { id: 4, size: 1 });
+    UnsortedArrayDictionary.insert(dict, { id: 5, size: 1 });
+    UnsortedArrayDictionary.insert(dict, { id: 6, size: 1 });
     Assert.areEqual(dict.length, 6);
   }
 
@@ -75,5 +80,17 @@ class TestUnsortedArrayDictionaryTest
     Assert.areEqual(dict.length, 3);
     UnsortedArrayDictionary.delete(dict, UnsortedArrayDictionary.search(dict, 3));
     Assert.areEqual(dict.length, 2);
+  }
+
+  @Test
+  public function testMinimum():Void
+  {
+    Assert.areEqual(UnsortedArrayDictionary.minimum(dict, TestUnsortedArrayDictionaryTest.fooComparator).id, 2);
+  }
+
+  @Test
+  public function testMaximum():Void
+  {
+    Assert.areEqual(UnsortedArrayDictionary.maximum(dict, TestUnsortedArrayDictionaryTest.fooComparator).id, 3);
   }
 }
