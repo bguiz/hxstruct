@@ -10,7 +10,7 @@ typedef Foo = {
   public var size: Int;
 };
 
-class TestUnsortedArrayDictionaryTest
+class UnsortedArrayDictionaryTest
 {
   var dict:Array<Foo>;
 
@@ -85,12 +85,12 @@ class TestUnsortedArrayDictionaryTest
   @Test
   public function testMinimum():Void
   {
-    Assert.areEqual(UnsortedArrayDictionary.minimum(dict, TestUnsortedArrayDictionaryTest.fooComparator).id, 2);
+    Assert.areEqual(UnsortedArrayDictionary.minimum(dict, UnsortedArrayDictionaryTest.fooComparator).id, 2);
   }
 
   @Test
   public function testMaximum():Void
   {
-    Assert.areEqual(UnsortedArrayDictionary.maximum(dict, TestUnsortedArrayDictionaryTest.fooComparator).id, 3);
+    Assert.areEqual(UnsortedArrayDictionary.maximum(dict, UnsortedArrayDictionaryTest.fooComparator).id, 3);
   }
 }
