@@ -5,6 +5,7 @@ import massive.munit.Assert;
 import massive.munit.async.AsyncFactory;
 import bguiz.struct.sort.BubbleSortArray;
 import bguiz.struct.sort.SelectionSortArray;
+import bguiz.struct.sort.MergeSortArray;
 
 class SortsTest
 {
@@ -31,7 +32,7 @@ class SortsTest
   @Before
   public function setup():Void
   {
-    dict = [10,1,-1,3,0,6,5,-2,-3,9,8,7,4,2];
+    dict = [10,-4,1,-1,3,0,6,5,-2,-3,9,8,7,4,11,2];
   }
 
   @After
@@ -41,6 +42,7 @@ class SortsTest
 
   public static function assertArrayEqual <T>(a: Array<T>, b: Array<T>): Void {
     Assert.areEqual(a.length, b.length);
+    Assert.areEqual(a.toString(), b.toString());
     var i:Int = 0;
     while (i < a.length) {
       Assert.areEqual(a[i], b[i]);
@@ -52,13 +54,21 @@ class SortsTest
   public function testBubble():Void
   {
     BubbleSortArray.inPlace(dict, SortsTest.intComparator);
-    assertArrayEqual(dict, [-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10]);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
   }
 
   @Test
   public function testSelection():Void
   {
     SelectionSortArray.inPlace(dict, SortsTest.intComparator);
-    assertArrayEqual(dict, [-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10]);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testMerge():Void
+  {
+    var out:Array<Int> = MergeSortArray.outPlace(dict, SortsTest.intComparator);
+    // trace('out', out);
+    assertArrayEqual(out, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
   }
 }
