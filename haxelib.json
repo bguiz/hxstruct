@@ -6,7 +6,7 @@
   "tags": ["data", "struct", "algorithm"],
   "contributors" : ["bguiz"],
   "classPath": "src/",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "releasenote": "",
   "dependencies":
   {
