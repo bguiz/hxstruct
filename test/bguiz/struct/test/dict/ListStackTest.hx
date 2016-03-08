@@ -53,9 +53,12 @@ class ListStackTest
     Assert.areEqual(stack.size(), 0);
     stack.first = {
       item: { id: 1, size: 100 },
-      next: null,
+      next: {
+        item: { id: 2, size: 10 },
+        next: null,
+      },
     };
-    Assert.areEqual(stack.size(), 1);
+    Assert.areEqual(stack.size(), 2);
   }
 
   @Test
