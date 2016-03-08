@@ -11,16 +11,17 @@
 --next
 
 ## Flash 8
--main TestMain
--lib munit
--lib hamcrest
--cp src
+## No longer support AS2
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
 
--cp test
--swf-version 8
--swf build/as2_test.swf
+# -cp test
+# -swf-version 8
+# -swf build/as2_test.swf
 
---next
+# --next
 
 ## JavaScript
 -main TestMain
