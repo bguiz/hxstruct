@@ -11,8 +11,8 @@ Javascript, C++, C#, Java, Python, PHP, Actionscript, and more.
 - [ ] Dictionary
   - [x] ArrayBag
   - [x] ListBag
-  - [ ] ArrayStack
-  - [ ] ListStack
+  - [x] ArrayStack
+  - [x] ListStack
   - [ ] ArrayQueue
   - [ ] ListQueue
 
