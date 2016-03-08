@@ -1,12 +1,12 @@
 {
   "name": "struct",
-  "license": "GPL",
-  "description": "Structs plus algorithms",
+  "license": "GPL-3.0",
+  "description": "Data Structures and Algorithms in Haxe",
   "url": "https://github.com/bguiz/hxstruct",
-  "tags": ["data", "struct"],
+  "tags": ["data", "struct", "algorithm"],
   "contributors" : ["bguiz"],
   "classPath": "src/",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "releasenote": "",
   "dependencies":
   {
