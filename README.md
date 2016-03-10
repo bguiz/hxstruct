@@ -13,8 +13,8 @@ Javascript, C++, C#, Java, Python, PHP, Actionscript, and more.
   - [x] ListBag
   - [x] ArrayStack
   - [x] ListStack
-  - [ ] ArrayQueue
-  - [ ] ListQueue
+  - [x] ArrayQueue
+  - [x] ListQueue
 
 ## Tests
 
