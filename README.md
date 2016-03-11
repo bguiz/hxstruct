@@ -3,18 +3,27 @@
 General purpose data structures and algorithms written in Haxe.
 
 [Haxe](http://haxe.org/)
-transpiles or compiles to almost every major language or platform:
-Javascript, C++, C#, Java, Python, PHP, Actionscript, and more.
+transpiles or compiles to many languages and platforms.
 
 ## Data Structures
 
 - [ ] Dictionary
-  - [x] ArrayBag
-  - [x] ListBag
-  - [x] ArrayStack
-  - [x] ListStack
-  - [x] ArrayQueue
-  - [x] ListQueue
+  - [x] Array Bag
+  - [x] List Bag
+  - [x] Array Stack
+  - [x] List Stack
+  - [x] Array Queue
+  - [x] List Queue
+
+## Algorithms
+
+- [ ] Sort
+  - [x] Array Comparator Network Sort
+  - [ ] Array Bubble Sort
+  - [ ] Array Selection Sort
+  - [ ] Array Insertion Sort
+  - [ ] Array Merge Sort
+  - [ ] Array Quick Sort
 
 ## Tests
 
