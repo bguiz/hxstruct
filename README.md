@@ -23,8 +23,15 @@ transpiles or compiles to many languages and platforms.
   - [x] Array Selection Sort
   - [x] Array Insertion Sort
   - [x] Array Shell Sort
-  - [ ] Array Merge Sort
+  - [X] Array Merge Sort
+    - [x] Array Bottom Up Merge Sort
   - [ ] Array Quick Sort
+    - [ ] Array Three Way Quick Sort
+- [ ] Shuffle
+  - [ ] Sort Shuffle
+  - [ ] Knuth Shuffle
+- [ ] Select
+  - [ ] Array Quick Select
 
 ## Tests
 

@@ -8,6 +8,7 @@ import bguiz.struct.sort.SelectionSortArray;
 import bguiz.struct.sort.InsertionSortArray;
 import bguiz.struct.sort.ShellSortArray;
 import bguiz.struct.sort.MergeSortArray;
+import bguiz.struct.sort.QuickSortArray;
 
 class SortsTest
 {
@@ -99,6 +100,13 @@ class SortsTest
   public function testMergeSortBottomUp():Void
   {
     MergeSortArray.inPlaceBottomUpSort(dict, SortsTest.intComparator);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testQuickSort():Void
+  {
+    QuickSortArray.inPlaceSort(dict, SortsTest.intComparator);
     assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
   }
 }
