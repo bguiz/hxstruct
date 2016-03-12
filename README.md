@@ -19,9 +19,10 @@ transpiles or compiles to many languages and platforms.
 
 - [ ] Sort
   - [x] Array Comparator Network Sort
-  - [ ] Array Bubble Sort
-  - [ ] Array Selection Sort
-  - [ ] Array Insertion Sort
+  - [x] Array Bubble Sort
+  - [x] Array Selection Sort
+  - [x] Array Insertion Sort
+  - [x] Array Shell Sort
   - [ ] Array Merge Sort
   - [ ] Array Quick Sort
 

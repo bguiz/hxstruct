@@ -11,21 +11,21 @@ class SortUtil {
   }
   public static function arraySwapIndicesIfLess <T>(
     array: Array<T>, comparator: T -> T-> Int,
-    index1: Int, index2: Int): Void {
+    index1: Int, index2: Int): Bool {
     if (comparator(array[index1], array[index2]) < 0) {
       SortUtil.arraySwapIndices(array, index1, index2);
+      return true;
     }
-    return;
+    return false;
   }
 
   public static function arrayIsSorted <T>(
     array: Array<T>, comparator: T -> T-> Int): Bool {
-    var i:Int = 1;
-    while (i < array.length) {
+    var len:Int = array.length;
+    for (i in 1 ... len) {
       if (comparator(array[i], array[i-1]) < 0) {
         return false;
       }
-      ++i;
     }
     return true;
   }

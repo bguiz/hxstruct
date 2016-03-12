@@ -1,27 +1,25 @@
 package bguiz.struct.sort;
 
+import bguiz.struct.sort.SortUtil;
+
 class SelectionSortArray {
-  public static function inPlace <T>(array: Array<T>, comparator: T -> T-> Int): Void {
-    var i:Int = 0;
-    while (i < array.length) {
-      var min:T = array[i];
-      var minIndex:Int = i;
-      var j:Int = i + 1;
-      while (j < array.length) {
-        // select the minimum in the remainder of the array
-        if (comparator(array[j], min) < 0) {
-          min = array[j];
-          minIndex = j;
+  /**
+   * - ~N^2 execution time:
+   *   - comparisons: 0.5*N^2 average
+   *   - swaps: N average
+   */
+  public static function inPlaceSort <T>(
+    array: Array<T>, comparator: T -> T -> Int): Void {
+    var len:Int = array.length;
+    for (i in 0 ... len) {
+      var min:Int = i;
+      for (j in i+1 ... len) {
+        if (comparator(array[j], array[min]) < 0) {
+          min = j;
         }
-        ++j;
       }
-      if (min != array[i]) {
-        // swap them
-        var temp:T = array[i];
-        array[i] = array[minIndex];
-        array[minIndex] = temp;
-      }
-      ++i;
+      SortUtil.arraySwapIndices(array, min, i);
     }
+    return;
   }
 }
