@@ -113,4 +113,12 @@ class ComparatorNetworkSortArrayTest
       dict, ComparatorNetworkSortArrayTest.intComparator, 1);
     assertArrayEqual(dict, [10,-4,-1,0,1,3,5,6,-2,-3,9,8,7,4,11,2]);
   }
+
+  @Test
+  public function testSmallSortRangeComparatorNetwork8():Void
+  {
+    ComparatorNetworkSortArray.inPlaceSortRangeComparatorNetwork8(
+      dict, ComparatorNetworkSortArrayTest.intComparator, 1);
+    assertArrayEqual(dict, [10,-4,-2,-1,0,1,3,5,6,-3,9,8,7,4,11,2]);
+  }
 }
