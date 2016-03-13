@@ -1,6 +1,7 @@
 package bguiz.struct.sort;
 
 import bguiz.struct.sort.SortUtil;
+import bguiz.struct.shuffle.KnuthShuffleArray;
 
 class QuickSortArray {
   /**
@@ -10,15 +11,25 @@ class QuickSortArray {
    */
   public static function inPlaceSort <T>(
     array: Array<T>, comparator: T -> T-> Int): Void {
+    // Shuffle the array first, for a probabilistic guarantee
+    // against the worst case number of comparisons,
+    // which is of quadratic order
+    KnuthShuffleArray.inPlaceShuffle(array);
     inPlaceSortRange(array, comparator, 0, array.length - 1);
+  }
+
+  public static function inPlaceThreeWaySort <T>(
+    array: Array<T>, comparator: T -> T-> Int): Void {
+    // Shuffle the array first, for a probabilistic guarantee
+    // against the worst case number of comparisons,
+    // which is of quadratic order
+    KnuthShuffleArray.inPlaceShuffle(array);
+    inPlaceThreeWaySortRange(array, comparator, 0, array.length - 1);
   }
 
   public static function inPlaceSortRange <T>(
     arr: Array<T>, comparator: T -> T-> Int,
     low:Int, high:Int): Void {
-    //TODO shuffle the array first, for a probabilistic guarantee
-    // against the worst case number of comparisons,
-    // which is of quadratic order
     var len:Int = arr.length;
     if (high <= low) {
       return;
@@ -67,16 +78,17 @@ class QuickSortArray {
       }
     }
 
-    inPlaceSortRange(array, comparator, low, lessThan-1);
-    inPlaceSortRange(array, comparator, moreThan+1, high);
+    inPlaceThreeWaySortRange(array, comparator, low, lessThan-1);
+    inPlaceThreeWaySortRange(array, comparator, moreThan+1, high);
   }
 
   public static function inPlaceSelect <T>(
     array: Array<T>, comparator: T -> T -> Int,
     position: Int): T {
-    //TODO shuffle the array first, for a probabilistic guarantee
+    // Shuffle the array first, for a probabilistic guarantee
     // against the worst case number of comparisons,
     // which is of quadratic order
+    KnuthShuffleArray.inPlaceShuffle(array);
     var low:Int = 0;
     var high:Int = array.length - 1;
     while (high > low) {

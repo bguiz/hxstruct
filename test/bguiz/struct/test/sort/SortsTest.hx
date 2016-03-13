@@ -133,7 +133,7 @@ class SortsTest
   public function testQuickSortThreeWay():Void
   {
     var arrayWithRepeats: Array<Int> = [1,4,7,0,11,1,1,1,7,7,7,0,0];
-    QuickSortArray.inPlaceSort(arrayWithRepeats, SortsTest.intComparator);
+    QuickSortArray.inPlaceThreeWaySort(arrayWithRepeats, SortsTest.intComparator);
     assertArrayEqual(arrayWithRepeats, [0,0,0,1,1,1,1,4,7,7,7,7,11]);
   }
 

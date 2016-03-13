@@ -17,7 +17,7 @@ transpiles or compiles to many languages and platforms.
 
 ## Algorithms
 
-- [ ] Sort
+- [x] Sort
   - [x] Array Comparator Network Sort
   - [x] Array Bubble Sort
   - [x] Array Selection Sort
@@ -25,13 +25,13 @@ transpiles or compiles to many languages and platforms.
   - [x] Array Shell Sort
   - [X] Array Merge Sort
     - [x] Array Bottom Up Merge Sort
-  - [ ] Array Quick Sort
-    - [ ] Array Three Way Quick Sort
-- [ ] Shuffle
-  - [ ] Sort Shuffle
-  - [ ] Knuth Shuffle
-- [ ] Select
-  - [ ] Array Quick Select
+  - [x] Array Quick Sort
+    - [x] Array Three Way Quick Sort
+- [x] Shuffle
+  - [x] Sort Shuffle
+  - [x] Knuth Shuffle
+- [x] Select
+  - [x] Array Quick Select
 
 ## Tests
 
