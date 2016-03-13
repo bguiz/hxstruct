@@ -1,50 +1,157 @@
 package bguiz.struct.sort;
 
+import bguiz.struct.sort.ComparatorNetworkSortArray;
+
 class MergeSortArray {
-  public static function outPlace <T>(array: Array<T>, comparator: T -> T-> Int): Array<T> {
-    if (array.length < 2) {
-      return array;
+  /*
+   * - ~N*lgN execution time
+   *   - comparisons: 2N*lg2N
+   */
+  public static function inPlaceSort <T>(
+    array: Array<T>, comparator: T -> T -> Int): Void {
+    inPlaceSortRange(array, comparator, 0, array.length-1);
+    return;
+  }
+
+  public static function inPlaceSortRange <T>(
+    arr: Array<T>, comparator: T -> T -> Int,
+    low: Int, high: Int): Void {
+    var aux:Array<T> = [for(i in 0 ... arr.length) null];
+    auxiliarySort(arr, aux, comparator, low, high);
+    return;
+  }
+
+  public static function inPlaceBottomUpSort <T>(
+    array: Array<T>, comparator: T -> T -> Int):Void {
+    inPlaceBottomUpSortRange(array, comparator, 0, array.length-1);
+    return;
+  }
+
+  public static function inPlaceBottomUpSortRange <T>(
+    arr: Array<T>, comparator: T -> T -> Int,
+    low: Int, high: Int):Void {
+    var aux:Array<T> = [for(i in 0 ... arr.length) null];
+    auxiliaryBottomUpSort(arr, aux, comparator, low, high);
+    return;
+  }
+
+  private static function auxiliaryMerge <T>(
+    arr: Array<T>, aux: Array<T>, comparator: T -> T -> Int,
+    low: Int, mid: Int, high: Int): Void {
+
+    for (i in low ... high+1) {
+      aux[i] = arr[i];
     }
-    // split array to left and right halves
-    var midIdx:Int = Std.int(array.length / 2);
-    var leftArray:Array<T> = array.slice(0, midIdx);
-    var rightArray:Array<T> = array.slice(midIdx, array.length);
-    // recur
-    leftArray = MergeSortArray.outPlace(leftArray, comparator);
-    rightArray = MergeSortArray.outPlace(rightArray, comparator);
-    // merge
-    var out:Array<T> = new Array<T>();
-    var leftIdx:Int = 0;
-    var rightIdx:Int = 0;
-    var outIdx:Int = 0;
-    while (outIdx < array.length) {
-      if (leftIdx >= leftArray.length) {
-        // add the remainder of the right array to the out array
-        while (outIdx < array.length) {
-          out.push(rightArray[rightIdx]);
-          ++outIdx;
-          ++rightIdx;
-        }
+
+    var half1:Int = low;
+    var half2:Int = mid + 1;
+    for (i in low ... high+1) {
+      if (half2 > high) {
+        // 2nd half has been completely merged,
+        // so copy the remainder of 1st half
+        arr[i] = aux[half1];
+        ++half1;
       }
-      else if (rightIdx >= rightArray.length) {
-        // add the remainder of the left array to the out array
-        while (outIdx < array.length) {
-          out.push(leftArray[leftIdx]);
-          ++outIdx;
-          ++leftIdx;
-        }
+      else if (half1 > mid) {
+        // 1st half has been completely merged,
+        // so copy the remainder of the 2nd half
+        arr[i] = aux[half2];
+        ++half2;
       }
-      else if (comparator(leftArray[leftIdx], rightArray[rightIdx]) < 0) {
-        out.push(leftArray[leftIdx]);
-        ++outIdx;
-        ++leftIdx;
+      else if (comparator(aux[half1], aux[half2]) < 0) {
+        // 1st half at index is less than 2nd half at index,
+        // so copy element at index for the 1st half
+        arr[i] = aux[half1];
+        ++half1;
       }
       else {
-        out.push(rightArray[rightIdx]);
-        ++outIdx;
-        ++rightIdx;
+        // 2nd half at index is less than 1st half at index,
+        // so copy element at index for the 2nd half
+        arr[i] = aux[half2];
+        ++half2;
       }
     }
-    return out;
+
+    return;
+  }
+
+  private static function auxiliarySort <T>(
+    arr: Array<T>, aux: Array<T>, comparator: T -> T -> Int,
+    low: Int, high: Int): Void {
+    if (high <= low) {
+      return;
+    }
+
+    var mid:Int = Std.int((high + low) / 2);
+    if (!ComparatorNetworkSortArray.inPlaceSortRange(
+        arr, comparator, low, high)) {
+      // Optimisation: If the range to be sorted is small,
+      // palm off this portion of the work to a simpler sort algorithm
+      // as the computational costs of the divide and conquer techniques
+      // begin to outweigh their benefits
+      auxiliarySort(arr, aux, comparator, low, mid);
+      auxiliarySort(arr, aux, comparator, mid+1, high);
+      if (comparator(arr[mid], arr[mid+1]) > 0) {
+        // Optimisation: Only perform a merge when we know that
+        // the two halves ar out of order
+        // - arr[low ... mid] is sorted, and
+        // - arr[mid+1 ... high] is sorted, and now also
+        // - arr[mid] <= arr[mid+1]
+        // Therefore, arr[low ... high] is sorted
+        auxiliaryMerge(arr, aux, comparator, low, mid, high);
+      }
+    }
+
+    return;
+  }
+
+  private static function auxiliaryBottomUpSort <T>(
+    array: Array<T>, aux: Array<T>, comparator: T -> T -> Int,
+    rangeLow: Int, rangeHigh: Int): Void {
+    var len:Int = rangeHigh - rangeLow + 1;
+    var i:Int = rangeLow;
+    var step:Int;
+    step = ComparatorNetworkSortArray.MAX_SUPPORTED_NETWORK_SIZE;
+    while (i < len) {
+      // Optimisation: Break up the input array into subarray that can be sorted
+      // using comparator networks, and palm off this portion of the work,
+      // so that we can start merging with larger blocks below
+      var low:Int = i;
+      var high:Int = Std.int(Math.min(low + step, len)) - 1;
+      if (!ComparatorNetworkSortArray.inPlaceSortRange(
+        array, comparator, low, high)) {
+        step = 1;
+        break;
+      }
+      i = high + 1;
+    }
+
+    // Instead of divide and conquer,
+    // we go from the bottom up,
+    // merging adjacent elements, and then adjacent blocks of 2 elements,
+    // then blocks of 4, 8, 16, etc
+    // Due to the optimisation above, we do not start with a block size of 1,
+    // but instead with the step size, and start doubling from that
+    var size:Int = Std.int(Math.max(step, 1));
+    while (size < len) {
+      var low = rangeLow;
+      while (low < len - size) {
+        var mid:Int = low + size - 1;
+        var high:Int = Std.int(Math.min(low + (size * 2), len)) - 1;
+        // auxiliaryMerge(array, aux, comparator, low, mid, high);
+        if (comparator(array[mid], array[mid+1]) > 0) {
+          // Optimisation: Only perform a mergew when we know that
+          // - arr[low ... mid] is sorted, and
+          // - arr[mid+1 ... high] is sorted, and now also
+          // - arr[mid] <= arr[mid+1]
+          // Therefore, arr[low ... high] is sorted
+          auxiliaryMerge(array, aux, comparator, low, mid, high);
+        }
+        low = low + size * 2;
+      }
+      size = size * 2;
+    }
+
+    return;
   }
 }

@@ -5,7 +5,10 @@ import massive.munit.Assert;
 import massive.munit.async.AsyncFactory;
 import bguiz.struct.sort.BubbleSortArray;
 import bguiz.struct.sort.SelectionSortArray;
+import bguiz.struct.sort.InsertionSortArray;
+import bguiz.struct.sort.ShellSortArray;
 import bguiz.struct.sort.MergeSortArray;
+import bguiz.struct.sort.QuickSortArray;
 
 class SortsTest
 {
@@ -13,6 +16,9 @@ class SortsTest
 
   static function intComparator(a: Int, b: Int): Int {
     return a - b;
+  }
+  static function intReverseComparator(a: Int, b: Int): Int {
+    return b -a;
   }
 
   public function new()
@@ -51,24 +57,103 @@ class SortsTest
   }
 
   @Test
-  public function testBubble():Void
+  public function testBubbleSort():Void
   {
-    BubbleSortArray.inPlace(dict, SortsTest.intComparator);
+    BubbleSortArray.inPlaceSort(dict, SortsTest.intComparator);
     assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
   }
 
   @Test
-  public function testSelection():Void
+  public function testSelectionSort():Void
   {
-    SelectionSortArray.inPlace(dict, SortsTest.intComparator);
+    SelectionSortArray.inPlaceSort(dict, SortsTest.intComparator);
     assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
   }
 
   @Test
-  public function testMerge():Void
+  public function testInsertionSort():Void
   {
-    var out:Array<Int> = MergeSortArray.outPlace(dict, SortsTest.intComparator);
-    // trace('out', out);
-    assertArrayEqual(out, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+    InsertionSortArray.inPlaceSort(dict, SortsTest.intComparator);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testInsertionSortRange():Void
+  {
+    InsertionSortArray.inPlaceSortRange(
+      dict, SortsTest.intComparator, 1, 5);
+    assertArrayEqual(dict, [10,-4,-1,0,1,3,6,5,-2,-3,9,8,7,4,11,2]);
+  }
+
+  @Test
+  public function testShellSort():Void
+  {
+    ShellSortArray.inPlaceSort(dict, SortsTest.intComparator);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testMergeSort():Void
+  {
+    MergeSortArray.inPlaceSort(dict, SortsTest.intComparator);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testMergeSortRange():Void
+  {
+    MergeSortArray.inPlaceSortRange(
+      dict, SortsTest.intComparator, 1, 14);
+    assertArrayEqual(dict, [10,-4,-3,-2,-1,0,1,3,4,5,6,7,8,9,11,2]);
+  }
+
+  @Test
+  public function testMergeSortBottomUp():Void
+  {
+    MergeSortArray.inPlaceBottomUpSort(dict, SortsTest.intComparator);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testMergeSortBottomUpRange():Void
+  {
+    MergeSortArray.inPlaceBottomUpSortRange(
+      dict, SortsTest.intComparator, 1, 14);
+    assertArrayEqual(dict, [10,-4,-3,-2,-1,0,1,3,4,5,6,7,8,9,11,2]);
+  }
+
+  @Test
+  public function testQuickSort():Void
+  {
+    QuickSortArray.inPlaceSort(dict, SortsTest.intComparator);
+    assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testQuickSortThreeWay():Void
+  {
+    var arrayWithRepeats: Array<Int> = [1,4,7,0,11,1,1,1,7,7,7,0,0];
+    QuickSortArray.inPlaceThreeWaySort(arrayWithRepeats, SortsTest.intComparator);
+    assertArrayEqual(arrayWithRepeats, [0,0,0,1,1,1,1,4,7,7,7,7,11]);
+  }
+
+  @Test
+  public function testQuickSortSelectSmallestPosition():Void
+  {
+    trace(dict);
+    var secondSmallest = QuickSortArray.inPlaceSelect(
+      dict, SortsTest.intComparator, 1);
+    trace(dict);
+    Assert.areEqual(secondSmallest, -3);
+  }
+
+  @Test
+  public function testQuickSortSelectLargestPosition():Void
+  {
+    trace(dict);
+    var fourthLargest = QuickSortArray.inPlaceSelect(
+      dict, SortsTest.intReverseComparator, 3);
+    trace(dict);
+    Assert.areEqual(fourthLargest, 8);
   }
 }
