@@ -43,6 +43,34 @@ class QuickSortArray {
     }
   }
 
+  public static function inPlaceThreeWaySortRange <T>(
+    array: Array<T>, comparator: T -> T -> Int,
+    low, high): Void {
+    if (high < low) {
+      return;
+    }
+    var lessThan:Int = low;
+    var moreThan:Int = high;
+    var val = array[low];
+    var i:Int = low;
+    while (i <= moreThan) {
+      switch (comparator(array[i], val)) {
+        case c if (c < 0):
+          SortUtil.arraySwapIndices(array, lessThan, i);
+          ++lessThan;
+          ++i;
+        case c if (c > 0):
+          SortUtil.arraySwapIndices(array, i, moreThan);
+          --moreThan;
+        case _:
+          ++i;
+      }
+    }
+
+    inPlaceSortRange(array, comparator, low, lessThan-1);
+    inPlaceSortRange(array, comparator, moreThan+1, high);
+  }
+
   public static function inPlaceSelect <T>(
     array: Array<T>, comparator: T -> T -> Int,
     position: Int): T {
