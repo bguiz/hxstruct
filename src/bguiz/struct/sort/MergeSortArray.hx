@@ -9,17 +9,29 @@ class MergeSortArray {
    */
   public static function inPlaceSort <T>(
     array: Array<T>, comparator: T -> T -> Int): Void {
-    var aux:Array<T> = [for(i in 0 ... array.length) null];
-    auxiliarySort(array, aux, comparator, 0, array.length-1);
+    inPlaceSortRange(array, comparator, 0, array.length-1);
+    return;
+  }
 
+  public static function inPlaceSortRange <T>(
+    arr: Array<T>, comparator: T -> T -> Int,
+    low: Int, high: Int): Void {
+    var aux:Array<T> = [for(i in 0 ... arr.length) null];
+    auxiliarySort(arr, aux, comparator, low, high);
     return;
   }
 
   public static function inPlaceBottomUpSort <T>(
     array: Array<T>, comparator: T -> T -> Int):Void {
-    var aux = [for (i in 0 ... array.length) null];
-    auxiliaryBottomUpSort(array, aux, comparator);
+    inPlaceBottomUpSortRange(array, comparator, 0, array.length-1);
+    return;
+  }
 
+  public static function inPlaceBottomUpSortRange <T>(
+    arr: Array<T>, comparator: T -> T -> Int,
+    low: Int, high: Int):Void {
+    var aux:Array<T> = [for(i in 0 ... arr.length) null];
+    auxiliaryBottomUpSort(arr, aux, comparator, low, high);
     return;
   }
 
@@ -94,9 +106,10 @@ class MergeSortArray {
   }
 
   private static function auxiliaryBottomUpSort <T>(
-    array: Array<T>, aux: Array<T>, comparator: T -> T -> Int): Void {
-    var len:Int = array.length;
-    var i:Int = 0;
+    array: Array<T>, aux: Array<T>, comparator: T -> T -> Int,
+    rangeLow: Int, rangeHigh: Int): Void {
+    var len:Int = rangeHigh - rangeLow + 1;
+    var i:Int = rangeLow;
     var step:Int;
     step = ComparatorNetworkSortArray.MAX_SUPPORTED_NETWORK_SIZE;
     while (i < len) {
@@ -105,19 +118,23 @@ class MergeSortArray {
       // so that we can start merging with larger blocks below
       var low:Int = i;
       var high:Int = Std.int(Math.min(low + step, len)) - 1;
-      ComparatorNetworkSortArray.inPlaceSortRange(
-        array, comparator, low, high);
+      if (!ComparatorNetworkSortArray.inPlaceSortRange(
+        array, comparator, low, high)) {
+        step = 1;
+        break;
+      }
       i = high + 1;
     }
+
     // Instead of divide and conquer,
     // we go from the bottom up,
     // merging adjacent elements, and then adjacent blocks of 2 elements,
     // then blocks of 4, 8, 16, etc
     // Due to the optimisation above, we do not start with a block size of 1,
     // but instead with the step size, and start doubling from that
-    var size:Int = Std.int(step/2);
+    var size:Int = Std.int(Math.max(step, 1));
     while (size < len) {
-      var low = 0;
+      var low = rangeLow;
       while (low < len - size) {
         var mid:Int = low + size - 1;
         var high:Int = Std.int(Math.min(low + (size * 2), len)) - 1;

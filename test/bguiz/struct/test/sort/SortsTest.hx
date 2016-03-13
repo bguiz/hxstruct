@@ -97,10 +97,26 @@ class SortsTest
   }
 
   @Test
+  public function testMergeSortRange():Void
+  {
+    MergeSortArray.inPlaceSortRange(
+      dict, SortsTest.intComparator, 1, 14);
+    assertArrayEqual(dict, [10,-4,-3,-2,-1,0,1,3,4,5,6,7,8,9,11,2]);
+  }
+
+  @Test
   public function testMergeSortBottomUp():Void
   {
     MergeSortArray.inPlaceBottomUpSort(dict, SortsTest.intComparator);
     assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testMergeSortBottomUpRange():Void
+  {
+    MergeSortArray.inPlaceBottomUpSortRange(
+      dict, SortsTest.intComparator, 1, 14);
+    assertArrayEqual(dict, [10,-4,-3,-2,-1,0,1,3,4,5,6,7,8,9,11,2]);
   }
 
   @Test
