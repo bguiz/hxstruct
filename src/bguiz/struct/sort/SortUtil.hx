@@ -29,4 +29,30 @@ class SortUtil {
     }
     return true;
   }
+
+  public static function arrayMedianOf3Index <T>(
+    array: Array<T>, comparator: T -> T -> Int,
+    low: Int, high: Int): Int {
+    var mid: Int = Std.int((low + high) / 2);
+    var lowVal:T = array[low];
+    var midVal:T = array[mid];
+    var highVal:T = array[high];
+    if (comparator(lowVal, midVal) < 0) {
+      if (comparator(lowVal, highVal) >= 0) {
+        return low;
+      }
+      else if (comparator(midVal, highVal) < 0) {
+        return mid;
+      }
+    }
+    else {
+      if (comparator(lowVal, highVal) < 0) {
+        return low;
+      }
+      else if (comparator(midVal, highVal) >= 0) {
+        return mid;
+      }
+    }
+    return high;
+  }
 }

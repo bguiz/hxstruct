@@ -16,16 +16,31 @@ class QuickSortArray {
     inPlaceSortRange(array, comparator, 0, array.length - 1);
   }
 
-  private static function inPlaceSortRange <T>(
+  public static function inPlaceSortRange <T>(
     arr: Array<T>, comparator: T -> T-> Int,
     low:Int, high:Int): Void {
     var len:Int = arr.length;
     if (high <= low) {
       return;
     }
-    var mid:Int = partitionRange(arr, comparator, low, high);
-    inPlaceSortRange(arr, comparator, low, mid-1);
-    inPlaceSortRange(arr, comparator, mid+1, high);
+    if (!ComparatorNetworkSortArray.inPlaceSortRange(
+        arr, comparator, low, high)) {
+      // Optimisation: If the range to be sorted is small,
+      // palm off this portion of the work to a simpler sort algorithm
+      // as the computational costs of the divide and conquer techniques
+      // begin to outweigh their benefits
+
+      var mid:Int = SortUtil.arrayMedianOf3Index(arr, comparator, low, high);
+      SortUtil.arraySwapIndices(arr, low, mid);
+      // Optimisation: Find the median of 3 elements from the array,
+      // and swap that into the middle of the array
+      // as this makes the partitioning algorithm more efficient
+      // by selecting a better pivot (amortised)
+
+      mid = partitionRange(arr, comparator, low, high);
+      inPlaceSortRange(arr, comparator, low, mid-1);
+      inPlaceSortRange(arr, comparator, mid+1, high);
+    }
   }
 
   private static function partitionRange <T>(
