@@ -10,15 +10,15 @@ class QuickSortArray {
    */
   public static function inPlaceSort <T>(
     array: Array<T>, comparator: T -> T-> Int): Void {
-    //TODO shuffle the array first, for a probabilistic guarantee
-    // against the worst case number of comparisons,
-    // which is of quadratic order
     inPlaceSortRange(array, comparator, 0, array.length - 1);
   }
 
   public static function inPlaceSortRange <T>(
     arr: Array<T>, comparator: T -> T-> Int,
     low:Int, high:Int): Void {
+    //TODO shuffle the array first, for a probabilistic guarantee
+    // against the worst case number of comparisons,
+    // which is of quadratic order
     var len:Int = arr.length;
     if (high <= low) {
       return;
@@ -41,6 +41,31 @@ class QuickSortArray {
       inPlaceSortRange(arr, comparator, low, mid-1);
       inPlaceSortRange(arr, comparator, mid+1, high);
     }
+  }
+
+  public static function inPlaceSelect <T>(
+    array: Array<T>, comparator: T -> T -> Int,
+    position: Int): T {
+    //TODO shuffle the array first, for a probabilistic guarantee
+    // against the worst case number of comparisons,
+    // which is of quadratic order
+    var low:Int = 0;
+    var high:Int = array.length - 1;
+    while (high > low) {
+      // Repeatedly partition until the (position)th smallest
+      // element is at (position) index
+      var mid:Int = partitionRange(array, comparator, low, high);
+      if (mid < position) {
+        low = mid + 1;
+      }
+      else if (mid > position) {
+        high = mid - 1;
+      }
+      else {
+        return array[position];
+      }
+    }
+    return array[position];
   }
 
   private static function partitionRange <T>(

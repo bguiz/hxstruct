@@ -17,6 +17,9 @@ class SortsTest
   static function intComparator(a: Int, b: Int): Int {
     return a - b;
   }
+  static function intReverseComparator(a: Int, b: Int): Int {
+    return b -a;
+  }
 
   public function new()
   {
@@ -124,5 +127,25 @@ class SortsTest
   {
     QuickSortArray.inPlaceSort(dict, SortsTest.intComparator);
     assertArrayEqual(dict, [-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11]);
+  }
+
+  @Test
+  public function testQuickSortSelectSmallestPosition():Void
+  {
+    trace(dict);
+    var secondSmallest = QuickSortArray.inPlaceSelect(
+      dict, SortsTest.intComparator, 1);
+    trace(dict);
+    Assert.areEqual(secondSmallest, -3);
+  }
+
+  @Test
+  public function testQuickSortSelectLargestPosition():Void
+  {
+    trace(dict);
+    var fourthLargest = QuickSortArray.inPlaceSelect(
+      dict, SortsTest.intReverseComparator, 3);
+    trace(dict);
+    Assert.areEqual(fourthLargest, 8);
   }
 }
