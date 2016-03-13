@@ -3,11 +3,11 @@
 General purpose data structures and algorithms written in Haxe.
 
 [Haxe](http://haxe.org/)
-transpiles or compiles to many languages and platforms.
+transpiles or compiles to many target languages and platforms.
 
 ## Data Structures
 
-- [ ] Dictionary
+- [x] Dictionary
   - [x] Array Bag
   - [x] List Bag
   - [x] Array Stack
@@ -35,10 +35,31 @@ transpiles or compiles to many languages and platforms.
 
 ## Tests
 
-Run the unit tests using munit.
+Run the unit tests using
+[Massive Unit](http://github.com/massiveinteractive/MassiveUnit).
 
 ```bash
 haxelib run munit test
+```
+
+If you wish to run tests against just one target,
+say Javascript,
+simply add the target name to the end, like so:
+
+```bash
+haxelib run munit test -js
+```
+
+You can find the full list of available platforms
+in `test.hxml`, which is the configuration file
+used by the Haxe compiler when running Massive Unit.
+
+If you wish to run tests against the C++ target,
+you will need to install HXCPP first.
+
+```bash
+haxelib install hxcpp
+haxelib run munit test -cpp
 ```
 
 ## Author
