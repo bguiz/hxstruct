@@ -15,7 +15,7 @@ transpiles or compiles to many target languages and platforms.
   - [x] Array Queue
   - [x] List Queue
 - [ ] Priority Queue
-  - [ ] Array Unordered Priority Queue
+  - [x] Array Unordered Priority Queue
   - [ ] Array Ordered Priority Queue
   - [ ] Binary Heap Priority Queue
   - [ ] N-ary Heap Priority Queue
