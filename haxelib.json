@@ -3,10 +3,10 @@
   "license": "GPL",
   "description": "Data Structures and Algorithms in Haxe",
   "url": "https://github.com/bguiz/hxstruct",
-  "tags": ["data", "struct", "structure", "algorithm", "dictionary", "sort", "shuffle", "select"],
+  "tags": ["data", "struct", "structure", "algorithm", "dictionary", "heap", "priority queue", "sort", "shuffle", "select"],
   "contributors" : ["bguiz"],
   "classPath": "src/",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "releasenote": "",
   "dependencies":
   {
