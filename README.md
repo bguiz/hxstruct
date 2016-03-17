@@ -17,7 +17,7 @@ transpiles or compiles to many target languages and platforms.
 - [ ] Priority Queue
   - [x] Array Unordered Priority Queue
   - [ ] Array Ordered Priority Queue
-  - [ ] Binary Heap Priority Queue
+  - [x] Binary Heap Priority Queue
   - [ ] N-ary Heap Priority Queue
   - [ ] Fibonacci Heap Priority Queue
 - [ ] Search Tree
@@ -38,7 +38,7 @@ transpiles or compiles to many target languages and platforms.
 
 ## Algorithms
 
-- [x] Sort
+- [ ] Sort
   - [x] Array Comparator Network Sort
   - [x] Array Bubble Sort
   - [x] Array Selection Sort
@@ -52,7 +52,7 @@ transpiles or compiles to many target languages and platforms.
 - [x] Shuffle
   - [x] Sort Shuffle
   - [x] Knuth Shuffle
-- [x] Select
+- [ ] Select
   - [x] Array Quick Select
   - [ ] Array Binary Search
 
