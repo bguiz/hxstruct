@@ -140,20 +140,16 @@ class SortsTest
   @Test
   public function testQuickSortSelectSmallestPosition():Void
   {
-    trace(dict);
     var secondSmallest = QuickSortArray.inPlaceSelect(
       dict, SortsTest.intComparator, 1);
-    trace(dict);
     Assert.areEqual(secondSmallest, -3);
   }
 
   @Test
   public function testQuickSortSelectLargestPosition():Void
   {
-    trace(dict);
     var fourthLargest = QuickSortArray.inPlaceSelect(
       dict, SortsTest.intReverseComparator, 3);
-    trace(dict);
     Assert.areEqual(fourthLargest, 8);
   }
 }

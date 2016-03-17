@@ -14,10 +14,31 @@ transpiles or compiles to many target languages and platforms.
   - [x] List Stack
   - [x] Array Queue
   - [x] List Queue
+- [ ] Priority Queue
+  - [x] Array Unordered Priority Queue
+  - [ ] Array Ordered Priority Queue
+  - [x] Binary Heap Priority Queue
+  - [ ] N-ary Heap Priority Queue
+  - [ ] Fibonacci Heap Priority Queue
+- [ ] Search Tree
+  - [ ] List Unordered Symbol Table
+  - [ ] Array Ordered Symbol Table
+  - [ ] Binary Search Tree
+  - [ ] 2-3 Search Tree
+  - [ ] Left Leaning Red-Black Binary Search Tree
+  - [ ] B Tree
+  - [ ] B+ Tree
+- [ ] Hash Table
+  - [ ] List Unordered Hash Table
+  - [ ] Array Ordered Hash Table
+  - [ ] Binary Search Tree Hash Table
+  - [ ] Red-Black Binary Search Tree Hash Table
+  - [ ] Separate Chaining Hash Table
+  - [ ] Linear Probing Hash Table
 
 ## Algorithms
 
-- [x] Sort
+- [ ] Sort
   - [x] Array Comparator Network Sort
   - [x] Array Bubble Sort
   - [x] Array Selection Sort
@@ -27,11 +48,13 @@ transpiles or compiles to many target languages and platforms.
     - [x] Array Bottom Up Merge Sort
   - [x] Array Quick Sort
     - [x] Array Three Way Quick Sort
+  - [ ] Binary Heap Sort
 - [x] Shuffle
   - [x] Sort Shuffle
   - [x] Knuth Shuffle
-- [x] Select
+- [ ] Select
   - [x] Array Quick Select
+  - [ ] Array Binary Search
 
 ## Tests
 
