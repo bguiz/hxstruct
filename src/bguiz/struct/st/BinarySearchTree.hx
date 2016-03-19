@@ -146,7 +146,7 @@ class BinarySearchTree<K,V> {
   }
 
   public static function iterator <K, V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int): Iterator<BinaryTreeNode<K, V>> {
+    st:BinaryTree<K,V>): Iterator<BinaryTreeNode<K, V>> {
     var queue:ArrayDictionary<BinaryTreeNode<K, V>> = {
       data: [],
     };

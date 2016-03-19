@@ -23,7 +23,7 @@ transpiles or compiles to many target languages and platforms.
 - [ ] Search Tree
   - [ ] List Unordered Symbol Table
   - [ ] Array Ordered Symbol Table
-  - [ ] Binary Search Tree
+  - [x] Binary Search Tree
   - [ ] 2-3 Search Tree
   - [ ] Left Leaning Red-Black Binary Search Tree
   - [ ] B Tree
