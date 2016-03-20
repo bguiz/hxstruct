@@ -5,7 +5,7 @@ import bguiz.struct.st.BinaryTreeNode;
 import bguiz.struct.dict.ArrayDictionary;
 using bguiz.struct.dict.ArrayQueue;
 
-class BinarySearchTree<K,V> {
+class BinarySearchTree<K, V> {
 
   /*
    * ~lgN
@@ -13,8 +13,8 @@ class BinarySearchTree<K,V> {
    * - average: 1.39lgN
    * - worst: N
    */
-  public static function get <K,V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int,
+  public static function get <K, V>(
+    st:BinaryTree<K, V>, comparator: K -> K -> Int,
     key: K): V {
     var node:BinaryTreeNode<K, V> = st.root;
     while (node != null) {
@@ -36,14 +36,14 @@ class BinarySearchTree<K,V> {
    * - average: 1.39lgN
    * - worst: N
    */
-  public static function put <K,V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int,
+  public static function put <K, V>(
+    st:BinaryTree<K, V>, comparator: K -> K -> Int,
     key: K, value: V): Void {
     st.root = putNode(st.root, comparator, key, value);
   }
 
   private static function putNode <K, V>(
-    node:BinaryTreeNode<K,V>, comparator: K -> K -> Int,
+    node:BinaryTreeNode<K, V>, comparator: K -> K -> Int,
     key: K, value: V): BinaryTreeNode<K, V> {
     if (node == null) {
       return {
@@ -76,7 +76,7 @@ class BinarySearchTree<K,V> {
    * due to the fact that it is inherently asymmetric
    */
   public static function delete <K, V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int,
+    st:BinaryTree<K, V>, comparator: K -> K -> Int,
     key: K): Void {
     st.root = deleteNode(st.root, comparator, key);
   }
