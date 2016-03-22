@@ -23,16 +23,18 @@ class LLRedBlackSearchTreeTest {
       root: {
         key: 8,
         value: "acht",
+        red: false,
         left: {
           key: 4,
           value: "vier",
+          red: false,
           left: null,
           right: null,
-          red: false,
         },
         right: {
           key: 12,
           value: "zwölf",
+          red: false,
           left: {
             key: 10,
             value: "zehn",
@@ -43,13 +45,11 @@ class LLRedBlackSearchTreeTest {
           right: {
             key: 14,
             value: "vierzehn",
+            red: false,
             left: null,
             right: null,
-            red: false,
           },
-          red: false,
         },
-        red: false,
       },
     };
   }
@@ -67,9 +67,9 @@ class LLRedBlackSearchTreeTest {
     st.root = {
       key: 10,
       value: "zehn",
+      red: false,
       left: null,
       right: null,
-      red: false,
     };
     var value: String;
     value = st.get(intComparator, 10);
@@ -113,16 +113,159 @@ class LLRedBlackSearchTreeTest {
   }
 
   @Test
-  public function testPutInsertWithSeveralElements(): Void {
+  public function testPutInsertAtRootLeft(): Void {
     var value:String;
-    st.put(intComparator, 15, "fünfzehn");
-    value = st.root.right.right.right.value;
-    Assert.isNotNull(value);
-    Assert.areEqual(value, "fünfzehn");
+    var isRed:Bool;
+
+    //test insert without any rotate
     st.put(intComparator, 1, "eins");
     value = st.root.left.left.value;
+    isRed = st.root.left.left.red;
     Assert.isNotNull(value);
     Assert.areEqual(value, "eins");
+    Assert.areEqual(isRed, true);
+  }
+
+  @Test
+  public function testPutInsertAtRootRight(): Void {
+    var value:String;
+    var isRed:Bool;
+
+    //test rotate left
+    st.put(intComparator, 15, "fünfzehn");
+    // trace(st);
+    value = st.root.right.right.value;
+    isRed = st.root.right.right.red;
+    Assert.isNotNull(value);
+    Assert.areEqual(value, "fünfzehn");
+    Assert.areEqual(isRed, false);
+    value = st.root.right.right.left.value;
+    isRed = st.root.right.right.left.red;
+    Assert.isNotNull(value);
+    Assert.areEqual(value, "vierzehn");
+    Assert.areEqual(isRed, true);
+  }
+
+  @Test
+  public function testPutInsertAt3NodeLess(): Void {
+    var value:String;
+    var isRed:Bool;
+
+    //test insert left of a 3-node
+    st.root.left.red = true; //now 4&8 are a 3-node
+    st.put(intComparator, 2, 'zwei');
+
+    value = st.root.value;
+    Assert.areEqual(value, "vier");
+
+    value = st.root.left.value;
+    isRed = st.root.left.red;
+    Assert.areEqual(value, "zwei");
+    Assert.isFalse(isRed);
+
+    value = st.root.right.value;
+    isRed = st.root.right.red;
+    Assert.areEqual(value, "acht");
+    Assert.isFalse(isRed);
+  }
+
+  @Test
+  public function testPutInsertAt3NodeBetween(): Void {
+    var value:String;
+    var isRed:Bool;
+
+    //test insert left of a 3-node
+    st.root.left.red = true; //now 4&8 are a 3-node
+    st.put(intComparator, 6, 'sechs');
+
+    value = st.root.value;
+    Assert.areEqual(value, "sechs");
+
+    value = st.root.left.value;
+    isRed = st.root.left.red;
+    Assert.areEqual(value, "vier");
+    Assert.isFalse(isRed);
+
+    value = st.root.right.value;
+    isRed = st.root.right.red;
+    Assert.areEqual(value, "acht");
+    Assert.isFalse(isRed);
+  }
+
+  @Test
+  public function testPutInsertAt3NodeMore(): Void {
+    var value:String;
+    var isRed:Bool;
+
+    //test insert left of a 3-node
+    st.root.left.left = {
+      key: 2,
+      value: 'zwei',
+      red: true,
+      left: null,
+      right: null,
+    };
+    // 2&4 are a 3-node
+
+    st.put(intComparator, 6, 'sechs');
+
+    value = st.root.value;
+    Assert.areEqual(value, "acht");
+
+    value = st.root.left.value;
+    isRed = st.root.left.red;
+    Assert.areEqual(value, "vier");
+    Assert.isTrue(isRed);
+
+    value = st.root.left.left.value;
+    isRed = st.root.left.left.red;
+    Assert.areEqual(value, "zwei");
+    Assert.isFalse(isRed);
+
+    value = st.root.left.right.value;
+    isRed = st.root.left.right.red;
+    Assert.areEqual(value, "sechs");
+    Assert.isFalse(isRed);
+  }
+
+  @Test
+  public function testPutInsertWitchBalanceCascade(): Void {
+    var value:String;
+    var isRed:Bool;
+
+    //test insert a node which triggers a cascade of node rebalancing
+    //(rotate left, rotate right, flip colour) on multiple levels
+
+    st.root.right.left.red = true; //now 10&12 are a 3-node
+    st.put(intComparator, 9, "neun");
+
+    value = st.root.value;
+    Assert.areEqual(value, "zehn");
+
+    value = st.root.left.value;
+    isRed = st.root.left.red;
+    Assert.areEqual(value, "acht");
+    Assert.isTrue(isRed);
+
+    value = st.root.left.left.value;
+    isRed = st.root.left.left.red;
+    Assert.areEqual(value, "vier");
+    Assert.isFalse(isRed);
+
+    value = st.root.left.right.value;
+    isRed = st.root.left.right.red;
+    Assert.areEqual(value, "neun");
+    Assert.isFalse(isRed);
+
+    value = st.root.right.value;
+    isRed = st.root.right.red;
+    Assert.areEqual(value, "zwölf");
+    Assert.isFalse(isRed);
+
+    value = st.root.right.right.value;
+    isRed = st.root.right.right.red;
+    Assert.areEqual(value, "vierzehn");
+    Assert.isFalse(isRed);
   }
 
   @Test

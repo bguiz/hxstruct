@@ -30,6 +30,44 @@ class LLRedBlackSearchTree<K, V> {
     return null;
   }
 
+  private static function nodeIsRed <K, V>(
+    node: RedBlackTreeNode<K, V>): Bool {
+    return (node != null && node.red);
+  }
+
+  private static function nodeIsBlack <K, V>(
+    node: RedBlackTreeNode<K, V>): Bool {
+    return (node == null || !node.red);
+  }
+
+  private static function nodeRotateLeft <K, V>(
+    node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
+    var promotedChild:RedBlackTreeNode<K, V> = node.right;
+    node.right = promotedChild.left;
+    promotedChild.left = node;
+    promotedChild.red = node.red;
+    node.red = true;
+    return promotedChild;
+  }
+
+  private static function nodeRotateRight <K, V>(
+    node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
+    var promotedChild:RedBlackTreeNode<K, V> = node.left;
+    node.left = promotedChild.right;
+    promotedChild.right = node;
+    promotedChild.red = node.red;
+    node.red = true;
+    return promotedChild;
+  }
+
+  private static function nodeFlipColour <K, V>(
+    node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
+    node.red = true;
+    node.left.red = false;
+    node.right.red = false;
+    return node;
+  }
+
   /*
    * ~lgN
    *
@@ -39,29 +77,41 @@ class LLRedBlackSearchTree<K, V> {
   public static function put <K, V>(
     st:RedBlackTree<K, V>, comparator: K -> K -> Int,
     key: K, value: V): Void {
-    st.root = putNode(st.root, comparator, key, value);
+    st.root = nodePut(st.root, comparator, key, value);
+    st.root.red = false;
   }
 
-  private static function putNode <K, V>(
+  private static function nodePut <K, V>(
     node:RedBlackTreeNode<K, V>, comparator: K -> K -> Int,
     key: K, value: V): RedBlackTreeNode<K, V> {
     if (node == null) {
       return {
         key: key,
         value: value,
+        red: true,
         left: null,
         right: null,
-        red: false,
       };
     }
     switch (comparator(key, node.key)) {
       case c if (c < 0):
-        node.left = putNode(node.left, comparator, key, value);
+        node.left = nodePut(node.left, comparator, key, value);
       case c if (c > 0):
-        node.right = putNode(node.right, comparator, key, value);
+        node.right = nodePut(node.right, comparator, key, value);
       case _:
         node.value = value;
     }
+
+    if (nodeIsBlack(node.left) && nodeIsRed(node.right)) {
+      node = nodeRotateLeft(node);
+    }
+    if (nodeIsRed(node.left) && nodeIsRed(node.left.left)) {
+      node = nodeRotateRight(node);
+    }
+    if (nodeIsRed(node.left) && nodeIsRed(node.right)) {
+      node = nodeFlipColour(node);
+    }
+
     return node;
   }
 
@@ -78,10 +128,11 @@ class LLRedBlackSearchTree<K, V> {
   public static function delete <K, V>(
     st:RedBlackTree<K, V>, comparator: K -> K -> Int,
     key: K): Void {
-    st.root = deleteNode(st.root, comparator, key);
+    st.root = nodeDelete(st.root, comparator, key);
+    st.root.red = false;
   }
 
-  private static function deleteNode <K, V>(
+  private static function nodeDelete <K, V>(
     node: RedBlackTreeNode<K, V>, comparator: K -> K -> Int,
     key: K): RedBlackTreeNode<K, V> {
     if (node == null) {
@@ -89,9 +140,9 @@ class LLRedBlackSearchTree<K, V> {
     }
     switch(comparator(key, node.key)) {
       case c if (c < 0):
-        node.left = deleteNode(node.left, comparator, key);
+        node.left = nodeDelete(node.left, comparator, key);
       case c if (c > 0):
-        node.right = deleteNode(node.right, comparator, key);
+        node.right = nodeDelete(node.right, comparator, key);
       case _:
         if (node.left == null) {
           return node.right;
@@ -104,14 +155,14 @@ class LLRedBlackSearchTree<K, V> {
         // so we need to find the minimum child from it's right subtree
         // to replace it
         var oldNode: RedBlackTreeNode<K, V> = node;
-        node = getMinimumNode(oldNode.right);
-        node.right = deleteMinimumNode(oldNode.right);
+        node = nodeGetMinimum(oldNode.right);
+        node.right = nodeDeleteMinimum(oldNode.right);
         node.left = oldNode.left;
     }
     return node;
   }
 
-  private static function getMinimumNode <K, V>(
+  private static function nodeGetMinimum <K, V>(
     node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
     while (node.left != null) {
       node = node.left;
@@ -119,7 +170,7 @@ class LLRedBlackSearchTree<K, V> {
     return node;
   }
 
-  private static function getMaximumNode <K, V>(
+  private static function nodeGetMaximum <K, V>(
     node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
     while (node.right != null) {
       node = node.right;
@@ -127,21 +178,21 @@ class LLRedBlackSearchTree<K, V> {
     return node;
   }
 
-  private static function deleteMinimumNode <K, V>(
+  private static function nodeDeleteMinimum <K, V>(
     node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
     if (node.left == null) {
       return node.right;
     }
-    node.left = deleteMinimumNode(node.left);
+    node.left = nodeDeleteMinimum(node.left);
     return node;
   }
 
-  private static function deleteMaximumNode <K, V>(
+  private static function nodeDeleteMaximum <K, V>(
     node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
     if (node.right == null) {
       return node.left;
     }
-    node.right = deleteMaximumNode(node.right);
+    node.right = nodeDeleteMaximum(node.right);
     return node;
   }
 
