@@ -25,7 +25,7 @@ transpiles or compiles to many target languages and platforms.
   - [ ] Array Ordered Symbol Table
   - [x] Binary Search Tree
   - [ ] 2-3 Search Tree
-  - [ ] Left Leaning Red-Black Binary Search Tree
+    - [x] Left Leaning Red-Black Binary Search Tree
   - [ ] B Tree
   - [ ] B+ Tree
 - [ ] Hash Table

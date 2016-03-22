@@ -5,7 +5,7 @@ import bguiz.struct.st.BinaryTreeNode;
 import bguiz.struct.dict.ArrayDictionary;
 using bguiz.struct.dict.ArrayQueue;
 
-class BinarySearchTree<K,V> {
+class BinarySearchTree<K, V> {
 
   /*
    * ~lgN
@@ -13,8 +13,8 @@ class BinarySearchTree<K,V> {
    * - average: 1.39lgN
    * - worst: N
    */
-  public static function get <K,V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int,
+  public static function get <K, V>(
+    st:BinaryTree<K, V>, comparator: K -> K -> Int,
     key: K): V {
     var node:BinaryTreeNode<K, V> = st.root;
     while (node != null) {
@@ -36,14 +36,14 @@ class BinarySearchTree<K,V> {
    * - average: 1.39lgN
    * - worst: N
    */
-  public static function put <K,V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int,
+  public static function put <K, V>(
+    st:BinaryTree<K, V>, comparator: K -> K -> Int,
     key: K, value: V): Void {
-    st.root = putNode(st.root, comparator, key, value);
+    st.root = nodePut(st.root, comparator, key, value);
   }
 
-  private static function putNode <K, V>(
-    node:BinaryTreeNode<K,V>, comparator: K -> K -> Int,
+  private static function nodePut <K, V>(
+    node:BinaryTreeNode<K, V>, comparator: K -> K -> Int,
     key: K, value: V): BinaryTreeNode<K, V> {
     if (node == null) {
       return {
@@ -56,9 +56,9 @@ class BinarySearchTree<K,V> {
     }
     switch (comparator(key, node.key)) {
       case c if (c < 0):
-        node.left = putNode(node.left, comparator, key, value);
+        node.left = nodePut(node.left, comparator, key, value);
       case c if (c > 0):
-        node.right = putNode(node.right, comparator, key, value);
+        node.right = nodePut(node.right, comparator, key, value);
       case _:
         node.value = value;
     }
@@ -76,12 +76,12 @@ class BinarySearchTree<K,V> {
    * due to the fact that it is inherently asymmetric
    */
   public static function delete <K, V>(
-    st:BinaryTree<K,V>, comparator: K -> K -> Int,
+    st:BinaryTree<K, V>, comparator: K -> K -> Int,
     key: K): Void {
-    st.root = deleteNode(st.root, comparator, key);
+    st.root = nodeDelete(st.root, comparator, key);
   }
 
-  private static function deleteNode <K, V>(
+  private static function nodeDelete <K, V>(
     node: BinaryTreeNode<K, V>, comparator: K -> K -> Int,
     key: K): BinaryTreeNode<K, V> {
     if (node == null) {
@@ -89,9 +89,9 @@ class BinarySearchTree<K,V> {
     }
     switch(comparator(key, node.key)) {
       case c if (c < 0):
-        node.left = deleteNode(node.left, comparator, key);
+        node.left = nodeDelete(node.left, comparator, key);
       case c if (c > 0):
-        node.right = deleteNode(node.right, comparator, key);
+        node.right = nodeDelete(node.right, comparator, key);
       case _:
         if (node.left == null) {
           return node.right;
@@ -104,14 +104,14 @@ class BinarySearchTree<K,V> {
         // so we need to find the minimum child from it's right subtree
         // to replace it
         var oldNode: BinaryTreeNode<K, V> = node;
-        node = getMinimumNode(oldNode.right);
-        node.right = deleteMinimumNode(oldNode.right);
+        node = nodeGetMinimum(oldNode.right);
+        node.right = nodeDeleteMinimum(oldNode.right);
         node.left = oldNode.left;
     }
     return node;
   }
 
-  private static function getMinimumNode <K, V>(
+  private static function nodeGetMinimum <K, V>(
     node: BinaryTreeNode<K, V>): BinaryTreeNode<K, V> {
     while (node.left != null) {
       node = node.left;
@@ -119,7 +119,7 @@ class BinarySearchTree<K,V> {
     return node;
   }
 
-  private static function getMaximumNode <K, V>(
+  private static function nodeGetMaximum <K, V>(
     node: BinaryTreeNode<K, V>): BinaryTreeNode<K, V> {
     while (node.right != null) {
       node = node.right;
@@ -127,21 +127,21 @@ class BinarySearchTree<K,V> {
     return node;
   }
 
-  private static function deleteMinimumNode <K, V>(
+  private static function nodeDeleteMinimum <K, V>(
     node: BinaryTreeNode<K, V>): BinaryTreeNode<K, V> {
     if (node.left == null) {
       return node.right;
     }
-    node.left = deleteMinimumNode(node.left);
+    node.left = nodeDeleteMinimum(node.left);
     return node;
   }
 
-  private static function deleteMaximumNode <K, V>(
+  private static function nodeDeleteMaximum <K, V>(
     node: BinaryTreeNode<K, V>): BinaryTreeNode<K, V> {
     if (node.right == null) {
       return node.left;
     }
-    node.right = deleteMaximumNode(node.right);
+    node.right = nodeDeleteMaximum(node.right);
     return node;
   }
 
