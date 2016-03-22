@@ -271,27 +271,65 @@ class LLRedBlackSearchTreeTest {
   @Test
   public function testDeleteWithSeveralElements(): Void {
     var value:String;
+    var isRed:Bool;
     st.delete(intComparator, 12);
-    value = st.root.right.value;
-    Assert.isNotNull(value);
-    Assert.areNotEqual(value, "zwölf");
-    Assert.areEqual(value, "vierzehn");
+
     value = st.get(intComparator, 12);
     Assert.isNull(value);
+
+    Assert.isNull(st.root.right);
+
+    value = st.root.value;
+    isRed = st.root.red;
+    Assert.areEqual(value, "vierzehn");
+    Assert.isFalse(isRed);
+
+    value = st.root.left.value;
+    isRed = st.root.left.red;
+    Assert.areEqual(value, "acht");
+    Assert.isTrue(isRed);
+
+    value = st.root.left.left.value;
+    isRed = st.root.left.left.red;
+    Assert.areEqual(value, "vier");
+    Assert.isFalse(isRed);
+
+    value = st.root.left.right.value;
+    isRed = st.root.left.right.red;
+    Assert.areEqual(value, "zehn");
+    Assert.isFalse(isRed);
   }
 
   @Test
   public function testDeleteRootNodeWithSeveralElements(): Void {
     var value:String;
+    var isRed:Bool;
+
     st.delete(intComparator, 8);
-    value = st.root.value;
-    Assert.isNotNull(value);
-    Assert.areNotEqual(value, "acht");
-    // Test that the minimum of the right tree of the deleted node
-    // replaces the deleted node, as per the Hibbard deletion sequence
-    Assert.areEqual(value, "zehn");
+    trace(st);
+
     value = st.get(intComparator, 8);
     Assert.isNull(value);
+
+    value = st.root.value;
+    isRed = st.root.red;
+    Assert.areEqual(value, "zwölf");
+    Assert.isFalse(isRed);
+
+    value = st.root.left.value;
+    isRed = st.root.left.red;
+    Assert.areEqual(value, "zehn");
+    Assert.isTrue(isRed);
+
+    value = st.root.left.left.value;
+    isRed = st.root.left.left.red;
+    Assert.areEqual(value, "vier");
+    Assert.isFalse(isRed);
+
+    value = st.root.right.value;
+    isRed = st.root.right.red;
+    Assert.areEqual(value, "vierzehn");
+    Assert.isFalse(isRed);
   }
 
   @Test

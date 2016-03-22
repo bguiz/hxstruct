@@ -12,6 +12,8 @@ class LLRedBlackSearchTree<K, V> {
    *
    * - average: 1.39lgN
    * - worst: N
+   *
+   *  Reference: Sedgewick https://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
    */
   public static function get <K, V>(
     st:RedBlackTree<K, V>, comparator: K -> K -> Int,
@@ -68,6 +70,42 @@ class LLRedBlackSearchTree<K, V> {
     return node;
   }
 
+  private static function nodeRebalance <K, V>(
+    node: RedBlackTreeNode<K, V>,
+    shouldRotateLeftWhenBlackLeft: Bool): RedBlackTreeNode<K, V> {
+    if ((!shouldRotateLeftWhenBlackLeft || nodeIsBlack(node.left)) && nodeIsRed(node.right)) {
+      node = nodeRotateLeft(node);
+    }
+    if (nodeIsRed(node.left) && nodeIsRed(node.left.left)) {
+      node = nodeRotateRight(node);
+    }
+    if (nodeIsRed(node.left) && nodeIsRed(node.right)) {
+      node = nodeFlipColour(node);
+    }
+    return node;
+  }
+
+  private static function nodeMoveRedLeft <K, V> (
+    node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
+    node = nodeFlipColour(node);
+    if (nodeIsRed(node.right.left)) {
+      node.right = nodeRotateRight(node.right);
+      node = nodeRotateLeft(node);
+      node = nodeFlipColour(node);
+    }
+    return node;
+  }
+
+  private static function nodeMoveRedRight <K, V> (
+    node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
+    node = nodeFlipColour(node);
+    if (nodeIsRed(node.left.left)) {
+      node = nodeRotateRight(node);
+      node = nodeFlipColour(node);
+    }
+    return node;
+  }
+
   /*
    * ~lgN
    *
@@ -102,15 +140,7 @@ class LLRedBlackSearchTree<K, V> {
         node.value = value;
     }
 
-    if (nodeIsBlack(node.left) && nodeIsRed(node.right)) {
-      node = nodeRotateLeft(node);
-    }
-    if (nodeIsRed(node.left) && nodeIsRed(node.left.left)) {
-      node = nodeRotateRight(node);
-    }
-    if (nodeIsRed(node.left) && nodeIsRed(node.right)) {
-      node = nodeFlipColour(node);
-    }
+    node = nodeRebalance(node, true);
 
     return node;
   }
@@ -129,36 +159,41 @@ class LLRedBlackSearchTree<K, V> {
     st:RedBlackTree<K, V>, comparator: K -> K -> Int,
     key: K): Void {
     st.root = nodeDelete(st.root, comparator, key);
-    st.root.red = false;
+    if (st.root != null) {
+      st.root.red = false;
+    }
   }
 
   private static function nodeDelete <K, V>(
     node: RedBlackTreeNode<K, V>, comparator: K -> K -> Int,
     key: K): RedBlackTreeNode<K, V> {
-    if (node == null) {
-      return null;
+    if (comparator(key, node.key) < 0) {
+      if (nodeIsBlack(node.left) && nodeIsBlack(node.left.left)) {
+        node = nodeMoveRedLeft(node);
+      }
+      node.left = nodeDelete(node.left, comparator, key);
     }
-    switch(comparator(key, node.key)) {
-      case c if (c < 0):
-        node.left = nodeDelete(node.left, comparator, key);
-      case c if (c > 0):
+    else {
+      if (nodeIsRed(node.left)) {
+        node = nodeRotateRight(node);
+      }
+      if (comparator(key, node.key) == 0 && node.right == null) {
+        return null;
+      }
+      if (nodeIsBlack(node.right) && nodeIsBlack(node.right.left)) {
+        node = nodeMoveRedRight(node);
+      }
+      if (comparator(key, node.key) == 0) {
+        var minimumRightNode:RedBlackTreeNode<K, V> = nodeGetMinimum(node.right);
+        node.key = minimumRightNode.key;
+        node.value = minimumRightNode.value;
+        node.right = nodeDeleteMinimum(node.right);
+      }
+      else {
         node.right = nodeDelete(node.right, comparator, key);
-      case _:
-        if (node.left == null) {
-          return node.right;
-        }
-        if (node.right == null) {
-          return node.left;
-        }
-        // We have found a node whose key matches, and we want to delete it,
-        // but it has two children,
-        // so we need to find the minimum child from it's right subtree
-        // to replace it
-        var oldNode: RedBlackTreeNode<K, V> = node;
-        node = nodeGetMinimum(oldNode.right);
-        node.right = nodeDeleteMinimum(oldNode.right);
-        node.left = oldNode.left;
+      }
     }
+    node = nodeRebalance(node, false);
     return node;
   }
 
@@ -181,9 +216,13 @@ class LLRedBlackSearchTree<K, V> {
   private static function nodeDeleteMinimum <K, V>(
     node: RedBlackTreeNode<K, V>): RedBlackTreeNode<K, V> {
     if (node.left == null) {
-      return node.right;
+      return null;
+    }
+    if (nodeIsBlack(node.left) && nodeIsBlack(node.left.left)) {
+      node = nodeMoveRedLeft(node);
     }
     node.left = nodeDeleteMinimum(node.left);
+    node = nodeRebalance(node, false);
     return node;
   }
 
