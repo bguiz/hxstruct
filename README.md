@@ -33,7 +33,7 @@ transpiles or compiles to many target languages and platforms.
   - [ ] Array Ordered Hash Table
   - [ ] Binary Search Tree Hash Table
   - [ ] Red-Black Binary Search Tree Hash Table
-  - [ ] Separate Chaining Hash Table
+  - [x] Separate Chaining Hash Table
   - [ ] Linear Probing Hash Table
 
 ## Algorithms
