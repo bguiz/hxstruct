@@ -1,7 +1,6 @@
 ## struct
 
-General purpose data structures and algorithms,
-written in [Haxe](http://haxe.org/).
+General purpose data structures and algorithms.
 
 ## Data Structures
 
@@ -85,9 +84,10 @@ haxelib run munit test -cpp
 
 ## Cross Platform
 
-Note that [Haxe](http://haxe.org/)
-transpiles or compiles to many target languages and platforms.
-This library, therefore, is cross platform,
+This library is written in
+[Haxe](http://haxe.org/),
+which transpiles or compiles to many target languages and platforms.
+Therefore, this library is cross platform,
 and can be built and compiled/linked/required/imported
 into many varied projects.
 
