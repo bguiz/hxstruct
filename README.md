@@ -31,7 +31,7 @@ General purpose data structures and algorithms.
   - [ ] Binary Search Tree Hash Table
   - [ ] Red-Black Binary Search Tree Hash Table
   - [x] Separate Chaining Hash Table
-  - [ ] Linear Probing Hash Table
+  - [x] Linear Probing Hash Table
 
 ## Algorithms
 
