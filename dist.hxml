@@ -1,0 +1,32 @@
+-cp src
+--macro "include('bguiz.struct.dict')"
+--macro "include('bguiz.struct.ht')"
+--macro "include('bguiz.struct.pq')"
+--macro "include('bguiz.struct.shuffle')"
+--macro "include('bguiz.struct.sort')"
+--macro "include('bguiz.struct.st')"
+# -dce full
+--each
+
+## Flash 9+
+-swf dist/as3/struct.swf
+-swf-version 11
+
+--next
+
+## JavaScript
+-js dist/js/struct.js
+-debug
+-D js-flatten
+-D js-es5
+
+--next
+
+## Neko
+-neko dist/neko/struct.n
+
+--next
+
+## C++
+#-D HXCPP_M64
+-cpp dist/cpp/struct
