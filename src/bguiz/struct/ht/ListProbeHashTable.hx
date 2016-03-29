@@ -1,5 +1,6 @@
 package bguiz.struct.ht;
 
+@:expose("Struct.ListProbeHashTable")
 class ListProbeHashTable {
   public static function get <K, V>(
     ht: ListHashTable<K, V>, hasher: K -> Int,
