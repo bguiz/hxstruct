@@ -1,9 +1,6 @@
-## Haxe Struct
+## struct
 
-General purpose data structures and algorithms written in Haxe.
-
-[Haxe](http://haxe.org/)
-transpiles or compiles to many target languages and platforms.
+General purpose data structures and algorithms.
 
 ## Data Structures
 
@@ -34,7 +31,7 @@ transpiles or compiles to many target languages and platforms.
   - [ ] Binary Search Tree Hash Table
   - [ ] Red-Black Binary Search Tree Hash Table
   - [x] Separate Chaining Hash Table
-  - [ ] Linear Probing Hash Table
+  - [x] Linear Probing Hash Table
 
 ## Algorithms
 
@@ -84,6 +81,19 @@ you will need to install HXCPP first.
 haxelib install hxcpp
 haxelib run munit test -cpp
 ```
+
+## Cross Platform
+
+This library is written in
+[Haxe](http://haxe.org/),
+which transpiles or compiles to many target languages and platforms.
+Therefore, this library is cross platform,
+and can be built and compiled/linked/required/imported
+into many varied projects.
+
+As the author of this project, I cannot take credit for that,
+and instead it goes to the **amazing technology** under the hood of Haxe.
+If you think that is cool why not give Haxe a go?
 
 ## Author
 
