@@ -3,3 +3,4 @@
 /test/*.hx
 /*.log
 /dist
+/node_modules
