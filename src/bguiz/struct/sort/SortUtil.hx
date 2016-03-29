@@ -1,5 +1,6 @@
 package bguiz.struct.sort;
 
+@:expose("Struct.SortUtil")
 class SortUtil {
   public static function arraySwapIndices <T>(
     array: Array<T>,
