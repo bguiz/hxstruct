@@ -22,7 +22,7 @@
   ],
   "contributors" : ["bguiz"],
   "classPath": "src/",
-  "version": "0.6.0",
+  "version": "0.6.1-rc",
   "releasenote": "",
   "dependencies":
   {

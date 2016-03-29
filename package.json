@@ -1,11 +1,9 @@
 {
   "name": "hxstruct",
-  "version": "0.6.0",
+  "version": "0.6.1-rc",
   "description": "Data Structures and Algorithms in Haxe",
   "main": "dist/js/struct.js",
-  "directories": {
-    "test": "test"
-  },
+  "directories": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,5 +33,8 @@
     "sort",
     "shuffle",
     "select"
-  ]
+  ],
+  "devDependencies": {
+    "assert": "^1.3.0"
+  }
 }
