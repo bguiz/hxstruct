@@ -3,6 +3,7 @@ package bguiz.struct.shuffle;
 import bguiz.struct.shuffle.SortShuffleNode;
 import bguiz.struct.sort.InsertionSortArray;
 
+@:expose("Struct.SortShuffleArray")
 class SortShuffleArray {
   private static function sortShuffleNodeComparator <T>(
     a: SortShuffleNode<T>, b: SortShuffleNode<T>): Int {
