@@ -1,5 +1,6 @@
 package bguiz.struct.st;
 
+@:expose("Struct.BinaryTreeNode")
 typedef BinaryTreeNode<K,V> = {
   var key:K;
   var value:V;

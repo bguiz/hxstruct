@@ -1,5 +1,6 @@
 package bguiz.struct.st;
 
+@:expose("Struct.RedBlackTreeNode")
 typedef RedBlackTreeNode<K,V> = {
   var key:K;
   var value:V;
