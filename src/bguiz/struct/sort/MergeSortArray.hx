@@ -2,6 +2,7 @@ package bguiz.struct.sort;
 
 import bguiz.struct.sort.ComparatorNetworkSortArray;
 
+@:expose("Struct.MergeSortArray")
 class MergeSortArray {
   /*
    * - ~N*lgN execution time

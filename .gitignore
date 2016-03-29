@@ -2,3 +2,4 @@
 /report
 /test/*.hx
 /*.log
+/dist

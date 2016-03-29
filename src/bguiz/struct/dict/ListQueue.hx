@@ -1,5 +1,6 @@
 package bguiz.struct.dict;
 
+@:expose("Struct.ListQueue")
 class ListQueue {
   public static function enqueue<T>(queue:ListDictionary<T>, item: T): Void {
     var prevTail:ListNode<T> = queue.last;

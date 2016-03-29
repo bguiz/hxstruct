@@ -5,6 +5,7 @@ import bguiz.struct.st.BinaryTreeNode;
 import bguiz.struct.dict.ArrayDictionary;
 using bguiz.struct.dict.ArrayQueue;
 
+@:expose("Struct.BinarySearchTree")
 class BinarySearchTree<K, V> {
 
   /*

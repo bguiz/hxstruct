@@ -2,6 +2,7 @@ package bguiz.struct.sort;
 
 import bguiz.struct.sort.SortUtil;
 
+@:expose("Struct.BubbleSortArray")
 class BubbleSortArray {
   /**
    * - ~N^2 execution time:

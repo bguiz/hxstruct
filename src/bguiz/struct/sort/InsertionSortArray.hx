@@ -2,6 +2,7 @@ package bguiz.struct.sort;
 
 import bguiz.struct.sort.SortUtil;
 
+@:expose("Struct.InsertionSortArray")
 class InsertionSortArray {
   /**
    * - ~N^2 execution time:

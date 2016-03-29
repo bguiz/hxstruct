@@ -86,7 +86,8 @@ haxelib run munit test -cpp
 
 This library is written in
 [Haxe](http://haxe.org/),
-which transpiles or compiles to many target languages and platforms.
+which transpiles or compiles to
+[many target languages and platforms](http://haxe.org/documentation/introduction/compiler-targets.html).
 Therefore, this library is cross platform,
 and can be built and compiled/linked/required/imported
 into many varied projects.
