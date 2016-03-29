@@ -1,5 +1,6 @@
 package bguiz.struct.dict;
 
+@:expose("Struct.ArrayStack")
 class ArrayStack {
     public static function push<T>(stack: ArrayDictionary<T>, item: T): Void {
       stack.data.push(item);

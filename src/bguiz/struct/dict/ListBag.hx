@@ -1,5 +1,6 @@
 package bguiz.struct.dict;
 
+@:expose("Struct.ListBag")
 class ListBag {
     public static function add<T>(bag: ListDictionary<T>, item: T): Void {
       var prevHead:ListNode<T> = bag.first;

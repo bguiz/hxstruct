@@ -1,5 +1,6 @@
 package bguiz.struct.dict;
 
+@:expose("Struct.ArrayBag")
 class ArrayBag {
     public static function add<T>(
       bag: ArrayDictionary<T>, item: T): Void {
