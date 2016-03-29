@@ -1,5 +1,6 @@
 package bguiz.struct.dict;
 
+@:expose("Struct.ArrayQueue")
 class ArrayQueue {
   public static function enqueue<T>(queue:ArrayDictionary<T>, item: T): Void {
     queue.data.push(item);

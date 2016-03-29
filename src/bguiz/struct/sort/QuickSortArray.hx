@@ -3,6 +3,7 @@ package bguiz.struct.sort;
 import bguiz.struct.sort.SortUtil;
 import bguiz.struct.shuffle.KnuthShuffleArray;
 
+@:expose("Struct.QuickSortArray")
 class QuickSortArray {
   /**
    * - ~1.39N*lgN execution time:

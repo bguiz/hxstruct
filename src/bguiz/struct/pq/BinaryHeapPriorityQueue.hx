@@ -3,6 +3,7 @@ package bguiz.struct.pq;
 import bguiz.struct.pq.ArrayPriorityQueue;
 import bguiz.struct.sort.SortUtil;
 
+@:expose("Struct.BinaryHeapPriorityQueue")
 class BinaryHeapPriorityQueue<T> {
   /*
    * ~logN

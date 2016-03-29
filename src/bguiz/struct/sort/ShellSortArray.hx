@@ -2,6 +2,7 @@ package bguiz.struct.sort;
 
 import bguiz.struct.sort.SortUtil;
 
+@:expose("Struct.ShellSortArray")
 class ShellSortArray {
   /**
    * - ~N^2 execution time: (??? verify this)

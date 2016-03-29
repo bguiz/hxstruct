@@ -1,5 +1,6 @@
 package bguiz.struct.dict;
 
+@:expose("Struct.ListStack")
 class ListStack {
     public static function push<T>(stack: ListDictionary<T>, item: T): Void {
       var prevHead:ListNode<T> = stack.first;

@@ -2,6 +2,7 @@ package bguiz.struct.shuffle;
 
 import bguiz.struct.sort.SortUtil;
 
+@:expose("Struct.KnuthShuffleArray")
 class KnuthShuffleArray {
   public static function inPlaceShuffle <T>(
     array: Array<T>): Void {

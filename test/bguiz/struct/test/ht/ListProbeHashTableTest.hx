@@ -20,6 +20,9 @@ class ListProbeHashTableTest {
   public function setup() {
     ht = {
       capacity: 7,
+      // size of vector is more than capacity on purpose,
+      // to explicitly test that the specified capacity is used
+      // insted of inferring from vector size
       entries: new haxe.ds.Vector<ListHashNode<Int, String>>(10),
     };
   }
@@ -97,18 +100,18 @@ class ListProbeHashTableTest {
   }
 
   @Test
+  public function testPutWithUpdate() {
+    ht.put(intHasher, 14, "vierzehn");
+    ht.put(intHasher, 14, "fourteen");
+    Assert.areEqual("fourteen", ht.entries[0].value);
+  }
+
+  @Test
   public function testPutWithCollision() {
     ht.put(intHasher, 2, "zwei");
     ht.put(intHasher, 9, "neun");
     Assert.areEqual("neun", ht.entries[2].value);
     Assert.areEqual("zwei", ht.entries[2].next.value);
-  }
-
-  @Test
-  public function testPutWithUpdate() {
-    ht.put(intHasher, 14, "vierzehn");
-    ht.put(intHasher, 14, "fourteen");
-    Assert.areEqual("fourteen", ht.entries[0].value);
   }
 
   @Test
@@ -119,6 +122,8 @@ class ListProbeHashTableTest {
     ht.put(intHasher, 21, "einundzwanzig");
     ht.put(intHasher, 7, "seven");
     Assert.areEqual("seven", ht.entries[0].next.next.value);
+    Assert.areEqual("vierzehn", ht.entries[0].next.next.next.value);
+    Assert.areEqual("null", ht.entries[0].next.value);
   }
 
   @Test

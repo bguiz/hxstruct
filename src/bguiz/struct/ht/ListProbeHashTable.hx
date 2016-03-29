@@ -1,5 +1,6 @@
 package bguiz.struct.ht;
 
+@:expose("Struct.ListProbeHashTable")
 class ListProbeHashTable {
   public static function get <K, V>(
     ht: ListHashTable<K, V>, hasher: K -> Int,
@@ -58,7 +59,7 @@ class ListProbeHashTable {
 
     // Traverse chain with matching hash (if any) to find node with matching key
     // while keeping track of the previous node as well,
-    // so that link may be updated to "skip", thereby deleting, the mathed node
+    // so that link may be updated to "skip", thereby deleting, the matched node
     var node: ListHashNode<K, V> = ht.entries[hash];
     var prevNode: ListHashNode<K, V> = null;
     while (node != null) {

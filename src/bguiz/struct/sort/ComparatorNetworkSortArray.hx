@@ -3,6 +3,7 @@ package bguiz.struct.sort;
 import bguiz.struct.sort.InsertionSortArray;
 import bguiz.struct.sort.SortUtil;
 
+@:expose("Struct.ComparatorNetworkSortArray")
 class ComparatorNetworkSortArray {
   public static var MAX_SUPPORTED_NETWORK_SIZE = 8;
 
