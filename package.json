@@ -1,6 +1,6 @@
 {
   "name": "hxstruct",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Data Structures and Algorithms in Haxe",
   "main": "dist/js/struct.js",
   "directories": {},

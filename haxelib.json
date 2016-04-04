@@ -1,6 +1,6 @@
 {
   "name": "struct",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "license": "GPL",
   "description": "Data Structures and Algorithms in Haxe",
   "url": "https://github.com/bguiz/hxstruct",
