@@ -1,6 +1,6 @@
 {
   "name": "hxstruct",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Data Structures and Algorithms in Haxe",
   "main": "dist/js/struct.js",
   "directories": {},
@@ -32,7 +32,9 @@
     "hash table",
     "sort",
     "shuffle",
-    "select"
+    "select",
+    "graph",
+    "dfs"
   ],
   "devDependencies": {
     "assert": "^1.3.0"

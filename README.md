@@ -61,7 +61,7 @@ General purpose data structures and algorithms.
   - [x] Array Quick Select
   - [ ] Array Binary Search
 - [ ] Graph Operations
-  - [ ] Depth First Search
+  - [x] Depth First Search
   - [ ] Breadth First Search
   - [ ] Connected Components
   - [ ] Strongly Connected Components

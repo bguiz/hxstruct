@@ -1,6 +1,6 @@
 {
   "name": "struct",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "license": "GPL",
   "description": "Data Structures and Algorithms in Haxe",
   "url": "https://github.com/bguiz/hxstruct",
@@ -19,7 +19,9 @@
     "hash table",
     "sort",
     "shuffle",
-    "select"
+    "select",
+    "graph",
+    "dfs"
   ],
   "contributors" : ["bguiz"],
   "classPath": "src/",
