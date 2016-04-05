@@ -12,6 +12,14 @@ class DepthFirstSearchGraph {
       edgeTo: [for (i in 0...graph.vertices.length) null],
       marked: [for (i in 0...graph.vertices.length) false],
     };
+    depthFirstSearchPart(graph, startVertex, result);
+    return result;
+  }
+
+  public static function  depthFirstSearchPart<T> (
+    graph:AdjacencyGraph<T>,
+    startVertex:Int, result:SearchGraphResult<T>
+  ): Void {
     // recursion in a typical DFS implementation is so simple here
     // that a stack-based implementation is very simple
     var stack:ArrayDictionary<Int> = {
@@ -27,6 +35,5 @@ class DepthFirstSearchGraph {
         }
       }
     }
-    return result;
   }
 }

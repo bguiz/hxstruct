@@ -12,6 +12,14 @@ class BreadthFirstSearchGraph {
       edgeTo: [for (i in 0...graph.vertices.length) null],
       marked: [for (i in 0...graph.vertices.length) false],
     };
+    breadthFirstSearchPart(graph, startVertex, result);
+    return result;
+  }
+
+  public static function breadthFirstSearchPart<T> (
+    graph: AdjacencyGraph<T>,
+    startVertex:Int, result:SearchGraphResult<T>
+  ): Void {
     var queue:ArrayDictionary<Int> = {
       data: [startVertex],
     };
@@ -25,6 +33,5 @@ class BreadthFirstSearchGraph {
         }
       }
     }
-    return result;
   }
 }
