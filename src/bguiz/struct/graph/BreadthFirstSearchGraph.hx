@@ -1,10 +1,10 @@
 package bguiz.struct.graph;
 
 import bguiz.struct.dict.ArrayDictionary;
-using bguiz.struct.dict.ArrayStack;
+using bguiz.struct.dict.ArrayQueue;
 
-class DepthFirstSearchGraph {
-  public static function depthFirstSearch<T> (
+class BreadthFirstSearchGraph {
+  public static function breadthFirstSearch<T> (
     graph: AdjacencyGraph<T>,
     startVertex:Int): SearchGraphResult<T> {
     var result = {
@@ -12,17 +12,15 @@ class DepthFirstSearchGraph {
       edgeTo: [for (i in 0...graph.vertices.length) null],
       marked: [for (i in 0...graph.vertices.length) false],
     };
-    // recursion in a typical DFS implementation is so simple here
-    // that a stack-based implementation is very simple
-    var stack:ArrayDictionary<Int> = {
+    var queue:ArrayDictionary<Int> = {
       data: [startVertex],
     };
-    while (!stack.isEmpty()) {
-      var fromVertex:Int = stack.pop();
+    while (!queue.isEmpty()) {
+      var fromVertex:Int = queue.dequeue();
       result.marked[fromVertex] = true;
       for (toVertex in graph.adjacents[fromVertex]) {
         if (!result.marked[toVertex]) {
-          stack.push(toVertex);
+          queue.enqueue(toVertex);
           result.edgeTo[toVertex] = fromVertex;
         }
       }
