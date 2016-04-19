@@ -32,6 +32,18 @@ class DirectedAdjacencyGraphTest {
   }
 
   @Test
+  public function testReverse() {
+    var graph:AdjacencyGraph<Int> =
+      DirectedAdjacencyGraph.make([for (i in 0...10) i]);
+    graph.addEdge(1, 5);
+    var reversedGraph:AdjacencyGraph<Int> =
+      graph.reverseDirections();
+    Assert.areEqual(0, reversedGraph.adjacents[1].length);
+    Assert.areEqual(1, reversedGraph.adjacents[5].length);
+    Assert.areEqual(1, reversedGraph.adjacents[5][0]);
+  }
+
+  @Test
   public function testDepthFirstSearch() {
     var graph:AdjacencyGraph<Int> =
       DirectedAdjacencyGraph.make([for (i in 0...10) i]);

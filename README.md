@@ -63,7 +63,7 @@ General purpose data structures and algorithms.
 - [ ] Graph Operations
   - [x] Depth First Search
   - [x] Breadth First Search
-  - [ ] Connected Components
+  - [x] Connected Components
   - [ ] Strongly Connected Components
   - [ ] Bipartite Components
   - [ ] Cyclic Components
