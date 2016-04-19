@@ -1,14 +1,17 @@
 {
   "name": "struct",
-  "version": "0.6.1",
+  "version": "0.8.0",
   "license": "GPL",
-  "description": "Data Structures and Algorithms in Haxe",
+  "description": "Data Structures and Algorithms",
   "url": "https://github.com/bguiz/hxstruct",
   "tags": [
     "data",
     "struct",
     "structure",
     "algorithm",
+    "cross",
+    "js",
+    "utility",
     "dictionary",
     "heap",
     "priority queue",
@@ -19,10 +22,13 @@
     "hash table",
     "sort",
     "shuffle",
-    "select"
+    "select",
+    "graph",
+    "dfs",
+    "bfs"
   ],
   "contributors" : ["bguiz"],
-  "classPath": "src/",
+  "classPath": "src",
   "releasenote": "",
   "dependencies":
   {

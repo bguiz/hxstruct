@@ -26,7 +26,7 @@ class ArrayBagTest
   public function setup():Void
   {
     bag = {
-      data: new Array<Foo>()
+      data: new Array<Foo>(),
     };
   }
 

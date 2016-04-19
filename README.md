@@ -32,6 +32,14 @@ General purpose data structures and algorithms.
   - [ ] Red-Black Binary Search Tree Hash Table
   - [x] Separate Chaining Hash Table
   - [x] Linear Probing Hash Table
+- [ ] Graph
+  - [ ] Directed Matrix Graph
+  - [ ] Undirected Matrix Graph
+  - [ ] Directed Adjacency Graph
+  - [ ] Undirected Adjacency Graph
+  - [ ] Directed Edged Graph
+  - [ ] Undirected Edged Graph
+  - [ ] Flow Capacity Graph
 
 ## Algorithms
 
@@ -52,6 +60,30 @@ General purpose data structures and algorithms.
 - [ ] Select
   - [x] Array Quick Select
   - [ ] Array Binary Search
+- [ ] Graph Operations
+  - [x] Depth First Search
+  - [x] Breadth First Search
+  - [x] Connected Components
+  - [ ] Strongly Connected Components
+  - [ ] Bipartite Components
+  - [ ] Cyclic Components
+  - [ ] Euler Tour
+    - Visit each edge once
+  - [ ] Topological Sort
+- [ ] Graph Minimum Spanning Tree
+  - [ ] Lazy Prim's Minimum Spanning Tree
+  - [ ] Eager Prim's Minimum Spanning Tree
+  - [ ] Kruskal's Minimum Spanning Tree
+  - [ ] Euclidean Minimum Spanning Tree
+- [ ] Graph Shortest Path
+  - [ ] Dijkstra's Shortest Path
+    - Non-negative weights
+  - [ ] Bellman-Ford Shortest Path
+    - No negative cycles
+  - [ ] Topological Sort Shortest Path
+    - No directed cycles
+- [ ] Graph Flow
+  - [ ] Ford-Fulkerson Maximum Flow
 
 ## Tests
 
