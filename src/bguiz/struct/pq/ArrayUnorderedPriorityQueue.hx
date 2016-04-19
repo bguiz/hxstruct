@@ -3,7 +3,7 @@ package bguiz.struct.pq;
 import bguiz.struct.pq.ArrayPriorityQueue;
 import bguiz.struct.sort.SortUtil;
 
-@:expose("Struct.ArrayPriorityQueue")
+@:expose("Struct.ArrayUnorderedPriorityQueue")
 class ArrayUnorderedPriorityQueue<T> {
   public static function insert <T>(
     pq:ArrayPriorityQueue<T>, comparator: T -> T -> Int,
