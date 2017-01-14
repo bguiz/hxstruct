@@ -35,8 +35,8 @@ General purpose data structures and algorithms.
 - [ ] Graph
   - [ ] Directed Matrix Graph
   - [ ] Undirected Matrix Graph
-  - [ ] Directed Adjacency Graph
-  - [ ] Undirected Adjacency Graph
+  - [x] Directed Adjacency Graph
+  - [x] Undirected Adjacency Graph
   - [ ] Directed Edged Graph
   - [ ] Undirected Edged Graph
   - [ ] Flow Capacity Graph

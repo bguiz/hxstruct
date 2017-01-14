@@ -3,6 +3,7 @@ package bguiz.struct.graph;
 import bguiz.struct.dict.ArrayDictionary;
 using bguiz.struct.dict.ArrayQueue;
 
+@:expose("Struct.BreadthFirstSearchGraph")
 class BreadthFirstSearchGraph {
   public static function breadthFirstSearch<T> (
     graph: AdjacencyGraph<T>,
