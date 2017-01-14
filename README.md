@@ -69,7 +69,7 @@ General purpose data structures and algorithms.
   - [ ] Cyclic Components
   - [ ] Euler Tour
     - Visit each edge once
-  - [ ] Topological Sort
+  - [x] Topological Sort
 - [ ] Graph Minimum Spanning Tree
   - [ ] Lazy Prim's Minimum Spanning Tree
   - [ ] Eager Prim's Minimum Spanning Tree
