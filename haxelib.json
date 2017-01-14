@@ -1,6 +1,6 @@
 {
   "name": "struct",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "license": "GPL",
   "description": "Data Structures and Algorithms",
   "url": "https://github.com/bguiz/hxstruct",
@@ -25,7 +25,8 @@
     "select",
     "graph",
     "dfs",
-    "bfs"
+    "bfs",
+    "topological sort"
   ],
   "contributors" : ["bguiz"],
   "classPath": "src",
