@@ -1,6 +1,6 @@
 {
   "name": "hxstruct",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Data Structures and Algorithms",
   "main": "dist/js/struct.js",
   "directories": {},
@@ -22,6 +22,9 @@
     "struct",
     "structure",
     "algorithm",
+    "cross",
+    "js",
+    "utility",
     "dictionary",
     "heap",
     "priority queue",
@@ -35,7 +38,8 @@
     "select",
     "graph",
     "dfs",
-    "bfs"
+    "bfs",
+    "topological sort"
   ],
   "devDependencies": {
     "assert": "^1.3.0"
